@@ -43,6 +43,12 @@ make lint
 # Run tests
 make test
 
+# Run integration tests
+make test-integration
+
+# Run all tests with coverage
+make test-coverage
+
 # Clean cache files
 make clean
 #+END_SRC
@@ -51,4 +57,5 @@ make clean
 
 - =app.py= - Main FastHTML application
 - =pyproject.toml= - Project configuration and dependencies
-- =Makefile= - Development tasks
+- =Makefile= - Development tasks and test runner
+- =tests/= - Comprehensive test suite including integration tests

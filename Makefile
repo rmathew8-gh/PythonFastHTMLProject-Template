@@ -1,22 +1,7 @@
-.PHONY: help install dev run lint test test-verbose test-coverage test-watch test-fast test-failed test-specific test-debug test-html test-install-deps clean
+.PHONY: help install dev run lint test test-verbose test-coverage test-watch test-fast test-failed test-specific test-debug test-html test-install-deps test-integration test-unit test-all clean
 
 help:
-	@echo "Available commands:"
-	@echo "  install          - Install dependencies"
-	@echo "  dev              - Run development server with auto-reload"
-	@echo "  run              - Run production server"
-	@echo "  lint             - Run linting with ruff"
-	@echo "  test             - Run basic tests"
-	@echo "  test-verbose     - Run tests with verbose output"
-	@echo "  test-coverage    - Run tests with coverage report"
-	@echo "  test-watch       - Run tests in watch mode"
-	@echo "  test-fast        - Run tests and stop on first failure"
-	@echo "  test-failed      - Run only previously failed tests"
-	@echo "  test-specific    - Run specific tests (use: make test-specific TEST=\"test_name\")"
-	@echo "  test-debug       - Run tests with debug output"
-	@echo "  test-html        - Generate HTML coverage report"
-	@echo "  test-install-deps- Install additional test dependencies"
-	@echo "  clean            - Clean up cache and build files"
+	@echo "install dev run lint test test-all test-unit test-integration test-coverage clean"
 
 install:
 	uv run pip install -e ".[dev]"
@@ -34,17 +19,26 @@ lint:
 test:
 	uv run pytest
 
+test-all:
+	uv run pytest tests/
+
+test-unit:
+	uv run pytest tests/test_app.py
+
+test-integration:
+	uv run pytest tests/test_integration.py
+
 test-verbose:
 	uv run pytest -v
 
 test-coverage:
-	uv run pytest --cov=app --cov-report=term-missing --cov-report=html:htmlcov
+	uv run pytest --cov=app --cov-report=term-missing
 
 test-watch:
-	uv run pytest-watch -- -v
+	uv run pytest-watch
 
 test-fast:
-	uv run pytest -x --tb=short
+	uv run pytest -x
 
 test-failed:
 	uv run pytest --lf
@@ -53,15 +47,14 @@ test-specific:
 	uv run pytest -k $(TEST)
 
 test-debug:
-	uv run pytest -s -vv --tb=long
+	uv run pytest -s -vv
 
 test-html:
 	uv run pytest --cov=app --cov-report=html:htmlcov
-	@echo "Coverage report generated in htmlcov/index.html"
 
 test-install-deps:
 	uv add --dev pytest-cov pytest-watch
 
 clean:
 	rm -rf __pycache__ .pytest_cache .ruff_cache htmlcov
-	find . -type d -name __pycache__ -exec rm -rf {} +
+	find . -name __pycache__ -type d -delete

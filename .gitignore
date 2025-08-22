@@ -44,3 +44,4 @@ Thumbs.db
 .ruff_cache/
 /.sesskey
 /uv.lock
+/.coverage

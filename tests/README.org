@@ -1,0 +1,51 @@
+#+setupfile: ~/.org-mode-goodies/setup.org
+
+* Test Suite
+
+** Structure
+
+- *conftest.py*: Shared fixtures and utilities
+- *test_app.py*: Unit tests (29 tests) - fast feedback during development
+- *test_integration.py*: Integration tests (28 tests) - end-to-end validation
+
+** Running Tests
+
+#+begin_src bash
+make test           # All tests
+make test-unit      # Unit tests only (fast)
+make test-integration # Integration tests only
+make test-coverage  # With coverage report
+make test-verbose   # Verbose output
+#+end_src
+
+** Test Categories
+
+*** Unit Tests (test_app.py)
+- Root endpoint functionality
+- HTTP method validation and error handling  
+- HTML structure and content validation
+- Response headers and FastHTML rendering
+- CSS styling and content validation
+
+*** Integration Tests (test_integration.py)
+- End-to-end application workflow
+- Static file serving and system behavior
+- HTML semantics and accessibility
+- FastHTML integration features
+- System integration (concurrency, memory, error recovery)
+
+** Coverage
+- 85% code coverage
+- HTML rendering and structure
+- FastHTML component integration
+- HTTP status codes and headers
+- Static file serving
+- Error handling and performance
+
+** Adding Tests
+
+*Unit tests*: Focus on individual components, keep fast
+*Integration tests*: Test complete workflows and system behavior
+*Shared utilities*: Add common fixtures to conftest.py
+
+Use pytest fixtures and shared assertion functions from conftest.py.

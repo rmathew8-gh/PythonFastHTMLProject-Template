@@ -1,0 +1,37 @@
+# Cursor Rules for Agno-2.Trials
+
+## Project Overview
+Python FastAPI web application using FastHTML for HTML generation. Uses uv for dependencies, pytest for testing, and ruff for linting.
+
+## Code Style
+- Follow PEP 8 with 88 character line length
+- Use type hints for all functions
+- Use snake_case for variables/functions, PascalCase for classes
+- Group imports: standard library, third-party, local
+
+## FastAPI & FastHTML
+- Use dependency injection and proper error handling
+- Use Pydantic models for validation
+- Use FastHTML component system for HTML generation
+- Keep route handlers focused
+
+## Testing
+- All tests in `tests/` directory using pytest
+- Use `make test` to run tests
+- Aim for high test coverage
+- Follow existing patterns in test_app.py and test_integration.py
+
+## Development
+- Use `uv` for dependency management
+- Run `make lint` before committing
+- Keep main logic in app.py
+- Use `make clean` to remove cache files
+
+## Documentation
+- Use .org mode files instead of .md files when creating docs
+- Keep .org mode files very terse for expert programmers
+
+## Security & Performance
+- Validate all user inputs
+- Use async/await for I/O operations
+- Implement proper error handling
