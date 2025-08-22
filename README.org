@@ -1,0 +1,54 @@
+#+setupfile: ~/.org-mode-goodies/setup.org
+
+#+TITLE: Agno-2.Trials
+
+A basic FastHTML hello world project.
+
+* Setup
+
+#+BEGIN_SRC bash
+# Install dependencies
+make install
+
+# Or manually with uv
+uv sync
+#+END_SRC
+
+* Development
+
+#+BEGIN_SRC bash
+# Start development server
+make dev
+
+# Or manually
+uv run python -m fasthtml dev
+#+END_SRC
+
+* Production
+
+#+BEGIN_SRC bash
+# Run production server
+make run
+
+# Or manually
+uv run python -m fasthtml run
+#+END_SRC
+
+* Other Commands
+
+#+BEGIN_SRC bash
+# Lint code
+make lint
+
+# Run tests
+make test
+
+# Clean cache files
+make clean
+#+END_SRC
+
+* Project Structure
+
+- =app.py= - Main FastHTML application
+- =pyproject.toml= - Project configuration and dependencies
+- =Makefile= - Development tasks

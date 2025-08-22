@@ -1,0 +1,34 @@
+#+TITLE: FastHTML + FastAPI Requirements
+* Dependencies
+- [ ] Python >= 3.10
+- [ ] fastapi + uvicorn + python-fasthtml
+
+* Files
+- [ ] =pyproject.toml= (requires-python >=3.10, packages = ["."])
+- [ ] =Makefile= (install, dev, run, lint)
+- [ ] =app.py= (FastAPI + FastHTML components)
+
+* Pattern
+#+BEGIN_SRC python
+from fastapi import FastAPI, HTMLResponse
+from fasthtml.common import Html, Head, Body, H1, P
+
+app = FastAPI()
+
+@app.get("/", response_class=HTMLResponse)
+def hello():
+    return str(Html(
+        Head(Title("Title")),
+        Body(H1("Hello"), P("Content"))
+    ))
+#+END_SRC
+
+* Commands
+- [ ] =uv sync= (install)
+- [ ] =uvicorn app:app --reload --port 8001= (dev)
+- [ ] =make dev= (start server)
+
+* Issues
+- [ ] Python >=3.10 required
+- [ ] =packages = ["."]= in pyproject.toml
+- [ ] Use port 8001+ to avoid conflicts
