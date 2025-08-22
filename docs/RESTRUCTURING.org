@@ -1,0 +1,36 @@
+# Project Restructuring: src/ Layout
+
+## Overview
+Restructured the project to use a `src/` folder layout for better organization and scalability.
+
+## Changes Made
+
+### Directory Structure
+- Created `src/agno_trials/` package directory
+- Moved `app.py` to `src/agno_trials/app.py`
+- Added `src/agno_trials/__init__.py` with package metadata
+
+### Configuration Updates
+- Updated `pyproject.toml`:
+  - Changed package path to `src/agno_trials`
+  - Added hatch environment configuration
+- Updated `Makefile`:
+  - Changed uvicorn module reference from `app:app` to `agno_trials.app:app`
+  - Updated coverage targets to use `agno_trials` package
+
+### Test Updates
+- Updated `tests/conftest.py` import from `app` to `agno_trials.app`
+- Updated `tests/test_integration.py` file structure test to check new path
+
+### Benefits
+- Clear separation between source code and project files
+- Better import handling and package boundaries
+- Easier to add new modules and subpackages
+- Industry-standard Python project structure
+- Improved scalability for future growth
+
+## Verification
+- All tests pass (56 passed, 1 skipped)
+- Application runs correctly with `make dev`
+- Linting passes without errors
+- Coverage reporting works with new package structure

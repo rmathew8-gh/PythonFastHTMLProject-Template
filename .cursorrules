@@ -15,6 +15,9 @@ Python FastAPI web application using FastHTML for HTML generation. Uses uv for d
 - Use FastHTML component system for HTML generation
 - Keep route handlers focused
 
+## Directory Structure
+- maintain src files in a src/ folder with submodules
+
 ## Testing
 - All tests in `tests/` directory using pytest
 - Use `make test` to run tests

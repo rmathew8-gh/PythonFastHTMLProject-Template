@@ -16,6 +16,12 @@ dependencies = [
     "httpx",
 ]
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/web"]
+
+[tool.hatch.envs.default]
+path = "src"
+
 [project.optional-dependencies]
 dev = [
     "pytest",
@@ -35,6 +41,3 @@ ignore = ["E501"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
-
-[tool.hatch.build.targets.wheel]
-packages = ["."]

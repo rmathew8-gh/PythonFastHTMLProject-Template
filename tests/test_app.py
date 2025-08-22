@@ -6,16 +6,15 @@ using shared test utilities from conftest.py.
 """
 
 import pytest
-from bs4 import BeautifulSoup
 
 # Import shared test utilities
 from tests.conftest import (
-    assert_html_structure,
     assert_content_type_html,
-    assert_favicon_present,
     assert_css_styling_present,
+    assert_favicon_present,
+    assert_html_structure,
     assert_main_content_present,
-    assert_no_python_representation
+    assert_no_python_representation,
 )
 
 
@@ -136,7 +135,7 @@ class TestFastHTMLComponents:
     def test_fasthtml_to_html_rendering(self, root_response):
         """Test that FastHTML components are properly rendered to HTML"""
         html_content = root_response.text
-        
+
         # Test that FastHTML components are rendered as proper HTML
         assert '<!doctype html>' in html_content
         assert '<html>' in html_content
@@ -145,7 +144,7 @@ class TestFastHTMLComponents:
         assert '<h1>' in html_content
         assert '<div class="container">' in html_content
         assert '<p>' in html_content
-        
+
         # Test that Python representation is NOT present
         assert_no_python_representation(html_content)
 
@@ -213,7 +212,7 @@ class TestContentValidation:
             "Welcome to your basic FastHTML application.",
             "This is a minimal starting point for your project."
         ]
-        
+
         actual_texts = [p.text for p in paragraphs]
         for expected in expected_texts:
             assert expected in actual_texts

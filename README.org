@@ -4,6 +4,15 @@
 
 A basic FastHTML hello world project.
 
+* Useful
+** compile buffers
+#+begin_src elisp :results silent
+(roy/compile-and-rename "install")
+(roy/compile-and-rename "lint")
+(roy/compile-and-rename "test")
+(roy/compile-and-rename "run")
+#+end_src
+
 * Setup
 
 #+BEGIN_SRC bash

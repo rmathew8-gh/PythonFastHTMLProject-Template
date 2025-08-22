@@ -5,12 +5,13 @@ This module provides common fixtures, helper functions, and test utilities
 that can be shared across all test files.
 """
 
+from pathlib import Path
+
 import pytest
 from bs4 import BeautifulSoup
 from fastapi.testclient import TestClient
-from pathlib import Path
 
-from app import app
+from web.app import app
 
 
 @pytest.fixture
@@ -28,97 +29,97 @@ def root_response(client):
 @pytest.fixture
 def root_soup(root_response):
     """Provide a BeautifulSoup object of the root endpoint for HTML parsing tests."""
-    return BeautifulSoup(root_response.text, 'html.parser')
+    return BeautifulSoup(root_response.text, "html.parser")
 
 
 class TestHelpers:
     """Helper class containing common test utility methods."""
-    
+
     @staticmethod
     def assert_html_structure(soup):
         """Assert that the HTML has proper basic structure."""
-        assert soup.find('html') is not None
-        assert soup.find('head') is not None
-        assert soup.find('body') is not None
-    
+        assert soup.find("html") is not None
+        assert soup.find("head") is not None
+        assert soup.find("body") is not None
+
     @staticmethod
     def assert_content_type_html(response):
         """Assert that the response has correct HTML content type."""
         assert "content-type" in response.headers
         assert "text/html" in response.headers["content-type"]
         assert "charset=utf-8" in response.headers["content-type"]
-    
+
     @staticmethod
     def assert_favicon_present(soup):
         """Assert that favicon is properly linked in HTML."""
-        favicon = soup.find('link', rel='icon')
+        favicon = soup.find("link", rel="icon")
         assert favicon is not None
-        assert favicon.get('href') == '/static/favicon.svg'
-        assert favicon.get('type') == 'image/svg+xml'
-        assert favicon.get('sizes') == 'any'
-    
+        assert favicon.get("href") == "/static/favicon.svg"
+        assert favicon.get("type") == "image/svg+xml"
+        assert favicon.get("sizes") == "any"
+
     @staticmethod
     def assert_css_styling_present(soup):
         """Assert that CSS styling is present and contains expected properties."""
-        style = soup.find('style')
+        style = soup.find("style")
         assert style is not None
-        
+
         css_content = style.string
         expected_properties = [
-            'font-family: -apple-system',
-            'max-width: 800px',
-            'margin: 0 auto',
-            'color: #2563eb',
-            'background: #f9fafb'
+            "font-family: -apple-system",
+            "max-width: 800px",
+            "margin: 0 auto",
+            "color: #2563eb",
+            "background: #f9fafb",
         ]
-        
+
         for property_name in expected_properties:
             assert property_name in css_content
-    
+
     @staticmethod
     def assert_main_content_present(soup):
         """Assert that main content elements are present."""
-        h1 = soup.find('h1')
+        h1 = soup.find("h1")
         assert h1 is not None
         assert h1.text == "Hello from Agno-2.Trials!"
-        
-        container = soup.find('div', class_='container')
+
+        container = soup.find("div", class_="container")
         assert container is not None
-        
-        paragraphs = container.find_all('p')
+
+        paragraphs = container.find_all("p")
         assert len(paragraphs) == 2
-        
+
         expected_texts = [
             "Welcome to your basic FastHTML application.",
-            "This is a minimal starting point for your project."
+            "This is a minimal starting point for your project.",
         ]
-        
+
         actual_texts = [p.text for p in paragraphs]
         for expected in expected_texts:
             assert expected in actual_texts
-    
+
     @staticmethod
     def assert_no_python_representation(html_content):
         """Assert that HTML doesn't contain Python representation artifacts."""
-        python_artifacts = ['html(', 'head(', 'body(', 'h1(', 'div(', 'p(']
+        python_artifacts = ["html(", "head(", "body(", "h1(", "div(", "p("]
         for artifact in python_artifacts:
             assert artifact not in html_content
-    
+
     @staticmethod
     def assert_static_files_exist():
         """Assert that required static files exist."""
         static_dir = Path(__file__).parent.parent / "static"
         assert static_dir.exists()
         assert static_dir.is_dir()
-        
+
         favicon_file = static_dir / "favicon.svg"
         assert favicon_file.exists()
         assert favicon_file.is_file()
-    
+
     @staticmethod
     def assert_dependencies_available():
         """Assert that all required dependencies are available."""
-        required_deps = ['fastapi', 'uvicorn', 'fasthtml', 'httpx', 'bs4']
+        required_deps = ["fastapi", "uvicorn", "fasthtml", "httpx", "bs4"]
         for dep in required_deps:
             try:
                 __import__(dep)

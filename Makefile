@@ -8,10 +8,10 @@ install:
 	# uv sync
 
 dev:
-	uv run uvicorn app:app --reload --host 127.0.0.1 --port 8001
+	uv run uvicorn web.app:app --reload --host 127.0.0.1 --port 8001
 
 run:
-	uv run uvicorn app:app --host 127.0.0.1 --port 8001
+	uv run uvicorn web.app:app --host 127.0.0.1 --port 8001
 
 lint:
 	uv run ruff check --fix .
@@ -32,7 +32,7 @@ test-verbose:
 	uv run pytest -v
 
 test-coverage:
-	uv run pytest --cov=app --cov-report=term-missing
+	uv run pytest --cov=agno_trials --cov-report=term-missing
 
 test-watch:
 	uv run pytest-watch
@@ -50,7 +50,7 @@ test-debug:
 	uv run pytest -s -vv
 
 test-html:
-	uv run pytest --cov=app --cov-report=html:htmlcov
+	uv run pytest --cov=agno_trials --cov-report=html:htmlcov
 
 test-install-deps:
 	uv add --dev pytest-cov pytest-watch
