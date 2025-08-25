@@ -26,6 +26,8 @@ path = "src"
 dev = [
     "pytest",
     "ruff",
+    "python-lsp-server[all]",
+    "python-lsp-ruff",
     "beautifulsoup4",
     "requests",
     "pytest-cov",

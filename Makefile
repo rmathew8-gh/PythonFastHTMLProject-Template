@@ -14,7 +14,7 @@ run:
 	uv run uvicorn web.app:app --host 127.0.0.1 --port 8001
 
 lint:
-	uv run ruff check --fix .
+	uv run ruff check --unsafe-fixes --fix .
 
 test:
 	uv run pytest
